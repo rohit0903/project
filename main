@@ -4,3 +4,31 @@ CREATE TABLE `users` (
           `lastname` varchar(20) DEFAULT NULL,   
           PRIMARY KEY (`userid`)                 
         )
+
+---------------------------------
+
+<form method="POST" action='UserHandler'>
+
+		<input type="hidden" name="operation" value="insert" />
+		<p>
+			<b>Add New Record</b>
+		</p>
+		<table>
+			<tr>
+				<td>User ID</td>
+				<td><input type="text" name="userid" /></td>
+			</tr>
+			<tr>
+				<td>First Name</td>
+				<td><input type="text" name="firstName" /></td>
+			</tr>
+			<tr>
+				<td>Last Name</td>
+				<td><input type="text" name="lastName" /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="Submit" /></td>
+			</tr>
+		</table>
+	</form>
