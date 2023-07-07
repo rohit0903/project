@@ -1,1 +1,6 @@
-test
+CREATE TABLE `users` (                   
+          `userid` int(5) NOT NULL,              
+          `firstname` varchar(20) DEFAULT NULL,  
+          `lastname` varchar(20) DEFAULT NULL,   
+          PRIMARY KEY (`userid`)                 
+        )
