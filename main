@@ -1,26 +1,23 @@
-public class UserBean {
+public class UserDao {
 
-    private int id;
-    private String fName;
-    private String lName;
-        
-    
-    public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getfName() {
-		return fName;
-	}
-	public void setfName(String fName) {
-		this.fName = fName;
-	}
-	public String getlName() {
-		return lName;
-	}
-	public void setlName(String lName) {
-		this.lName = lName;
-	}	
+    private Connection conn;
+    public UserDao() {
+    	conn = ConnectionProvider.getConnection();
+    }
+
+    public void addUser(UserBean userBean) {
+        try {
+        	String sql = "INSERT INTO users(userid, firstname,lastname)" +
+    		" VALUES (?, ?, ? )";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            
+            ps.setInt(1, userBean.getId());
+            ps.setString(2, userBean.getfName());
+            ps.setString(3, userBean.getlName());            
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
