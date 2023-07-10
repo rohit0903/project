@@ -1,8 +1,1 @@
-	public void deleteUser(int userId) throws SQLException {
-		String sql = "delete from users where userid = ?";
-    	Connection conn = ConnectionProvider.getConnection();
-    	PreparedStatement ps = conn.prepareStatement(sql);
-    	ps.setInt(1, userId);
-    	
-    	ps.executeUpdate();
-	}
+<td><a href="UserHandler?userid=<%=user.getId()%>">Click to Delete</a></td>
