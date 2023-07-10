@@ -1,11 +1,1 @@
-protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int userId = Integer.parseInt(request.getParameter("userid"));
-		
-		UserDao dao = new UserDao();
-		try {
-			dao.deleteUser(userId);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-	}
+<td><a href="edit.jsp?userid=<%=user.getId()%>">Click to Edit</a></td>
