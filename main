@@ -1,47 +1,49 @@
-<%@page import="proj.UserBean"%>
-<%@page import="proj.UserDao"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+package proj;
 
-<%
-int userId = Integer.parseInt(request.getParameter("userid"));
-UserDao dao = new UserDao();
-UserBean user = dao.getUser(userId);
-%>
+import java.io.IOException;
+import java.sql.SQLException;
 
-<form method="POST" action='EditHandler'>
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-		<input type="hidden" name="operation" value="insert" />
-		<p>
-			<b>Edit User Record</b>
-		</p>
-		<table>
-			<tr>
-				<td>User ID</td>
-				<td><input type="text" name="userid" readonly="readonly" value="<%= user.getId() %>" /></td>
-			</tr>
-			<tr>
-				<td>First Name</td>
-				<td><input type="text" name="firstName" value="<%= user.getfName() %>" /></td>
-			</tr>
-			<tr>
-				<td>Last Name</td>
-				<td><input type="text" name="lastName" value="<%= user.getlName() %>"/></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><input type="submit" value="Submit" /></td>
-			</tr>
-		</table>
-	</form>
+/**
+ * Servlet implementation class EditHandler
+ */
+@WebServlet("/EditHandler")
+public class EditHandler extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public EditHandler() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int userId = Integer.parseInt(request.getParameter("userid"));
+		String fName = request.getParameter("firstName");
+		String lName = request.getParameter("lastName");
+		
+		UserBean user = new UserBean();
+		user.setId(userId);
+		user.setfName(fName);
+		user.setlName(lName);
+		
+		UserDao dao = new UserDao();
+		try {
+			dao.editUser(user);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		request.getRequestDispatcher("listUser.jsp").forward(request, response);
+	}
 
-</body>
-</html>
+}
