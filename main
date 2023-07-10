@@ -1,1 +1,47 @@
-<td><a href="edit.jsp?userid=<%=user.getId()%>">Click to Edit</a></td>
+<%@page import="proj.UserBean"%>
+<%@page import="proj.UserDao"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<%
+int userId = Integer.parseInt(request.getParameter("userid"));
+UserDao dao = new UserDao();
+UserBean user = dao.getUser(userId);
+%>
+
+<form method="POST" action='EditHandler'>
+
+		<input type="hidden" name="operation" value="insert" />
+		<p>
+			<b>Edit User Record</b>
+		</p>
+		<table>
+			<tr>
+				<td>User ID</td>
+				<td><input type="text" name="userid" readonly="readonly" value="<%= user.getId() %>" /></td>
+			</tr>
+			<tr>
+				<td>First Name</td>
+				<td><input type="text" name="firstName" value="<%= user.getfName() %>" /></td>
+			</tr>
+			<tr>
+				<td>Last Name</td>
+				<td><input type="text" name="lastName" value="<%= user.getlName() %>"/></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="Submit" /></td>
+			</tr>
+		</table>
+	</form>
+
+
+</body>
+</html>
