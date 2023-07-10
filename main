@@ -1,23 +1,18 @@
-public class UserDao {
-
-    private Connection conn;
-    public UserDao() {
-    	conn = ConnectionProvider.getConnection();
+public List<UserBean> getAllUsers() throws SQLException{
+    	List<UserBean> users = new ArrayList<>();
+	    
+    	String sql = "Select * from users";
+    	Connection conn = ConnectionProvider.getConnection();
+    	PreparedStatement ps = conn.prepareStatement(sql);
+    	
+    	ResultSet rs = ps.executeQuery(sql);
+    	while (rs.next()) {
+    		UserBean ub = new UserBean();
+    		ub.setId(rs.getInt("userid"));
+    		ub.setfName(rs.getString("firstname"));
+    		ub.setlName(rs.getString("lastname"));
+    		users.add(ub);
+		}
+    	
+    	return users;
     }
-
-    public void addUser(UserBean userBean) {
-        try {
-        	String sql = "INSERT INTO users(userid, firstname,lastname)" +
-    		" VALUES (?, ?, ? )";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            
-            ps.setInt(1, userBean.getId());
-            ps.setString(2, userBean.getfName());
-            ps.setString(3, userBean.getlName());            
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-}
