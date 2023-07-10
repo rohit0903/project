@@ -1,18 +1,42 @@
-public List<UserBean> getAllUsers() throws SQLException{
-    	List<UserBean> users = new ArrayList<>();
-	    
-    	String sql = "Select * from users";
-    	Connection conn = ConnectionProvider.getConnection();
-    	PreparedStatement ps = conn.prepareStatement(sql);
-    	
-    	ResultSet rs = ps.executeQuery(sql);
-    	while (rs.next()) {
-    		UserBean ub = new UserBean();
-    		ub.setId(rs.getInt("userid"));
-    		ub.setfName(rs.getString("firstname"));
-    		ub.setlName(rs.getString("lastname"));
-    		users.add(ub);
-		}
-    	
-    	return users;
-    }
+<%@page import="proj.UserDao"%>
+<%@page import="proj.UserBean"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<%
+
+UserDao dao = new UserDao();
+List<UserBean> users = dao.getAllUsers();
+
+for(UserBean user : users){
+
+%>
+<table  border="1">
+	<tr>
+		<td>
+			<%= user.getId() %>
+		</td>
+		<td>
+			<%= user.getfName() %>
+		</td>
+		<td>
+			<%= user.getlName() %>
+		</td>
+	</tr>
+
+</table>
+	
+<%	
+}
+%>
+
+</body>
+</html>
