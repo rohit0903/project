@@ -1,49 +1,30 @@
-package proj;
+public UserBean getUser(int userId) {
+    	UserBean userBean = new UserBean();
+        try {
+        	String sql = "SELECT * FROM users WHERE userid=?";
+            PreparedStatement ps = ConnectionProvider.getConnection().
+                    prepareStatement(sql);
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
 
-import java.io.IOException;
-import java.sql.SQLException;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-/**
- * Servlet implementation class EditHandler
- */
-@WebServlet("/EditHandler")
-public class EditHandler extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public EditHandler() {
-        super();
-        // TODO Auto-generated constructor stub
+            if (rs.next()) {
+            	userBean.setId(rs.getInt("userid"));
+            	userBean.setfName(rs.getString("firstname"));
+            	userBean.setlName(rs.getString("lastname"));                           
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userBean;
     }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int userId = Integer.parseInt(request.getParameter("userid"));
-		String fName = request.getParameter("firstName");
-		String lName = request.getParameter("lastName");
-		
-		UserBean user = new UserBean();
-		user.setId(userId);
-		user.setfName(fName);
-		user.setlName(lName);
-		
-		UserDao dao = new UserDao();
-		try {
-			dao.editUser(user);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		request.getRequestDispatcher("listUser.jsp").forward(request, response);
+	public void editUser(UserBean user) throws SQLException {
+		String sql = "update users set firstname=?, lastname=? where userid=?";
+    	Connection conn = ConnectionProvider.getConnection();
+    	PreparedStatement ps = conn.prepareStatement(sql);
+    	ps.setString(1, user.getfName());
+    	ps.setString(2, user.getlName());
+    	ps.setInt(3, user.getId());
+    	
+    	ps.executeUpdate();
 	}
-
-}
