@@ -1,5 +1,5 @@
-	@RequestMapping(name = "/hello", method = RequestMethod.GET)
-	public String hello(ModelMap modelMap) {
-		modelMap.addAttribute("name", "test123");
-		return "hello";
-	}
+<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>2.3.1</version>
+		</dependency>
