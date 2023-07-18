@@ -1,9 +1,5 @@
-@Bean(name="HelloWorld")
-	public ViewResolver viewResolver() {
-		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-		viewResolver.setViewClass(JstlView.class);
-		viewResolver.setPrefix("/WEB-INF/views/");
-		viewResolver.setSuffix(".jsp");
-
-		return viewResolver;
+	@RequestMapping(name = "/hello", method = RequestMethod.GET)
+	public String hello(ModelMap modelMap) {
+		modelMap.addAttribute("name", "test123");
+		return "hello";
 	}
