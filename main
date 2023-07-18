@@ -1,3 +1,5 @@
-https://docs.spring.io/spring-framework/docs/3.0.x/spring-framework-reference/html/overview.html
-
-https://docs.spring.io/spring-framework/docs/3.0.0.M3/reference/html/ch04s04.html#:~:text=singleton-,Scopes,-a%20single%20bean
+<form action="/action_page.php">
+  <label for="fname">First name:</label>
+  <input type="text" id="fname" name="fname"><br><br>
+  <input type="submit" value="Submit">
+</form>
