@@ -1,5 +1,12 @@
-<form action="/action_page.php">
-  <label for="fname">First name:</label>
-  <input type="text" id="fname" name="fname"><br><br>
-  <input type="submit" value="Submit">
-</form>
+public void onStartup(ServletContext container) throws ServletException {
+
+		AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
+		ctx.register(HelloWorldConfiguration.class);
+		ctx.setServletContext(container);
+
+		ServletRegistration.Dynamic servlet = container.addServlet(
+				"dispatcher", new DispatcherServlet(ctx));
+
+		servlet.setLoadOnStartup(1);
+		servlet.addMapping("/*");
+	}
