@@ -1,26 +1,4 @@
-<body>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th scope="row">Employee Id</th>
-					<th scope="row">First Name</th>
-					<th scope="row">Last Name</th>
-					<th scope="row">Email</th>
-					<th scope="row">Phone</th>
-					<th scope="row">Job Title</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${empList}" var="employee">
-					<tr>
-						<td>${employee.employeeId }</td>
-						<td>${employee.firstName }</td>
-						<td>${employee.lastName }</td>
-						<td>${employee.email }</td>
-						<td>${employee.phone }</td>
-						<td>${employee.jobTitle }</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-</body>
+<link href="../webjars/bootstrap/4.0.0/css/bootstrap.min.css"
+	rel="stylesheet" />
+<script src="../webjars/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="../webjars/jquery/3.0.0/js/jquery.min.js"></script>
