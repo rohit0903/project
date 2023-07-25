@@ -1,7 +1,5 @@
-@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public ModelAndView saveEmployee(@ModelAttribute("employeeForm") Employee employee) {
+String query = "INSERT INTO employees(employee_id, first_name, last_name, email, phone"
+				+ ", job_title) VALUES(?, ?, ?, ?, ?, ?)";
 		
-		employeeService.saveEmployee(employee);
-		
-		return new ModelAndView("redirect:/employee/");
-	}
+		jdbcTemplate.update(query, employee.getEmployeeId(), employee.getFirstName(), employee.getLastName(),
+				employee.getEmail(), employee.getPhone(), employee.getJobTitle());
