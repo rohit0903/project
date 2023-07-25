@@ -1,1 +1,7 @@
-<a class="btn btn-primary" href="/employee/add" role="button">Add New Employee</a>
+@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public ModelAndView saveEmployee(@ModelAttribute("employeeForm") Employee employee) {
+		
+		employeeService.saveEmployee(employee);
+		
+		return new ModelAndView("redirect:/employee/");
+	}
