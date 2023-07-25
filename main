@@ -1,2 +1,8 @@
-<th scope="row">Edit</th>
-<th scope="row">Delete</th>
+<td><spring:url
+								value="/employee/update/${employee.employeeId }" var="updateURL" />
+							<a class="btn btn-primary" href="${updateURL }" role="button">Update</a>
+						</td>
+						<td><spring:url
+								value="/employee/delete/${employee.employeeId }" var="deleteURL" />
+							<a class="btn btn-primary" href="${deleteURL }" role="button">Delete</a>
+						</td>
