@@ -1,5 +1,9 @@
-String query = "INSERT INTO employees(employee_id, first_name, last_name, email, phone"
-				+ ", job_title) VALUES(?, ?, ?, ?, ?, ?)";
-		
-		jdbcTemplate.update(query, employee.getEmployeeId(), employee.getFirstName(), employee.getLastName(),
-				employee.getEmail(), employee.getPhone(), employee.getJobTitle());
+@RequestMapping(value = "/update/{empId}", method = RequestMethod.GET)
+	public ModelAndView updateEmployee(@PathVariable String empId) {
+		ModelAndView model = new ModelAndView();
+
+		Employee emp = employeeService.getEmployee(empId);
+		model.addObject("employeeForm", emp);
+		model.setViewName("employee_form");
+		return model;
+	}
