@@ -1,5 +1,2 @@
-@RequestMapping(value = "/delete/{empId}", method = RequestMethod.GET)
-	public ModelAndView deleteEmployee(@PathVariable String empId) {
-		employeeService.deleteEmployee(empId);
-		return new ModelAndView("redirect:/employee/");
-	}
+String query = "DELETE FROM employees WHERE employee_id = ?";
+		jdbcTemplate.update(query, empId);
