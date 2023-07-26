@@ -1,9 +1,6 @@
-@RequestMapping(value = "/update/{empId}", method = RequestMethod.GET)
-	public ModelAndView updateEmployee(@PathVariable String empId) {
-		ModelAndView model = new ModelAndView();
+String query = "SELECT * FROM employees WHERE employee_id = ?";
+		RowMapper<Employee> rowMapper = new EmployeeRowMapper();
+		int id = Integer.parseInt(empId);
+		Employee employee = jdbcTemplate.queryForObject(query, rowMapper, id);
 
-		Employee emp = employeeService.getEmployee(empId);
-		model.addObject("employeeForm", emp);
-		model.setViewName("employee_form");
-		return model;
-	}
+		return employee;
