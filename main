@@ -1,3 +1,5 @@
-String query = "UPDATE employees SET first_name=?, last_name=?, email=?, phone=?, job_title=? WHERE employee_id=?";
-		jdbcTemplate.update(query, employee.getFirstName(), employee.getLastName(), employee.getEmail(),
-				employee.getPhone(), employee.getJobTitle(), employee.getEmployeeId());
+@RequestMapping(value = "/delete/{empId}", method = RequestMethod.GET)
+	public ModelAndView deleteEmployee(@PathVariable String empId) {
+		employeeService.deleteEmployee(empId);
+		return new ModelAndView("redirect:/employee/");
+	}
